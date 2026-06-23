@@ -2,7 +2,16 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { Link } from 'react-router-dom'
 
 export default function NavBar() {
-  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0()
+  const { isAuthenticated, isLoading, loginWithRedirect, logout, user } = useAuth0()
+
+  // render nothing in the auth section while SDK is rehydrating
+  if (isLoading) return (
+    <nav className="bg-blue-600 text-white shadow-md">
+      <div className="container mx-auto px-4 py-3">
+        <span className="font-bold text-lg">SD Final</span>
+      </div>
+    </nav>
+  )
 
   return (
     <nav className="bg-blue-600 text-white shadow-md">
