@@ -3,33 +3,33 @@
 > **Scope:** Minimal viable. No extras. 2-day window.  
 > **This doc is the source of truth for delegated execution.**
 
+## STATUS — 2026-06-23
+| Part | Component | Status |
+|------|-----------|--------|
+| A | Auth0 Setup | ✅ DONE — real values confirmed below |
+| A | Backend | ⏳ TODO — human-executed |
+| B | Frontend | ✅ DONE — agent completed in 5m, `npm run build` passes, 0 vulnerabilities |
+
 ---
 
 ## PART A — OVERVIEW & BACKEND (Human-executed)
 
-### A1. Auth0 Setup — Do this FIRST, everything depends on it
+### A1. Auth0 Setup — ✅ DONE
 
-#### Create the API (Resource Server)
-1. https://auth0.com → Dashboard → **Applications → APIs → + Create API**
-2. Name: `SD Final API` | Identifier: `https://sd-final-api` | Signing: `RS256`
-3. Save. Note the **Identifier** — this is your `AUTH0_AUDIENCE`.
+Auth0 tenant, API, and SPA Application are already created and confirmed working.
 
-#### Create the SPA Application
-1. Dashboard → **Applications → + Create Application**
-2. Name: `SD Final Frontend` | Type: `Single Page Application`
-3. Settings tab → note `Domain` and `Client ID`
-4. **Application URIs** → set ALL three fields to `http://localhost:5173`:
-   - Allowed Callback URLs
-   - Allowed Logout URLs
-   - Allowed Web Origins
-5. Save Changes.
-
-#### Your 3 values (fill these in before anything else)
+#### Confirmed values
 ```
-AUTH0_DOMAIN=YOUR-TENANT.us.auth0.com
+AUTH0_DOMAIN=dev-ym26lu2aglwbsv3n.us.auth0.com
+AUTH0_CLIENT_ID=2GOpjlAAhBl5IPIF6GEaPeWkuk8vnjba
 AUTH0_AUDIENCE=https://sd-final-api
-AUTH0_CLIENT_ID=<from SPA Application settings>
 ```
+
+#### Still verify in Auth0 dashboard (if login redirects break)
+SPA Application → Settings → Application URIs — all three must be `http://localhost:5173`:
+- Allowed Callback URLs
+- Allowed Logout URLs
+- Allowed Web Origins
 
 ---
 
@@ -450,11 +450,10 @@ public class PrivateController {
 ### A13. How to run the backend
 
 ```bash
-# Set env vars (Linux/Mac)
-export AUTH0_DOMAIN=YOUR-TENANT.us.auth0.com
+# Real values — confirmed from Auth0 tenant
+export AUTH0_DOMAIN=dev-ym26lu2aglwbsv3n.us.auth0.com
 export AUTH0_AUDIENCE=https://sd-final-api
 
-# Run
 mvn spring-boot:run
 ```
 
@@ -468,25 +467,35 @@ GET http://localhost:8080/api/private/hello  →  401 Unauthorized  ✓ correct
 
 ---
 
-## PART B — FRONTEND AGENT EXECUTION CONTRACT
+## PART B — FRONTEND AGENT EXECUTION CONTRACT — ✅ COMPLETED 2026-06-23
 
-> **THIS SECTION IS THE AGENT'S COMPLETE SPECIFICATION.**  
-> The agent must follow steps in order. No deviation. No additions.  
-> Every command is exact. Every file content is final — no partial writes.
+> Implemented by CLI agent in 5 minutes, 47.9K tokens.  
+> `npm run build` passes. `npm audit --audit-level=high` → 0 vulnerabilities.  
+> Committed as `7318afa feat: scaffold Auth0 frontend`.
+
+### Deviations from spec (agent-initiated, both correct)
+
+**1. No nested directory.**  
+Agent was already inside `sd-final-frontend/` so skipped `npm create vite@latest` scaffold. Implemented directly in repo root. Correct call — avoided `sd-final-frontend/sd-final-frontend/` nesting.
+
+**2. `ProtectedRoute` uses `useEffect` for redirect.**  
+Spec called `loginWithRedirect()` directly during render. Agent moved it into `useEffect`. Correct — calling side effects during render violates React's execution model and causes warnings in StrictMode.
+
+**3. Vite upgraded to 8.0.16.**  
+`npm audit` flagged vulnerable esbuild chain in Vite 5. Agent upgraded to Vite 8 + `@vitejs/plugin-react` 6 (compatible with Node 22). Correct.
 
 ---
 
-### B0. PRECONDITIONS — human provides these before running agent
-
-The agent must be given these three values as input before starting:
+### B0. PRECONDITIONS — ✅ confirmed
 
 ```
-AUTH0_DOMAIN=YOUR-TENANT.us.auth0.com
-AUTH0_CLIENT_ID=<from Auth0 SPA Application>
-AUTH0_AUDIENCE=https://sd-final-api
+VITE_AUTH0_DOMAIN=dev-ym26lu2aglwbsv3n.us.auth0.com
+VITE_AUTH0_CLIENT_ID=2GOpjlAAhBl5IPIF6GEaPeWkuk8vnjba
+VITE_AUTH0_AUDIENCE=https://sd-final-api
+VITE_API_BASE_URL=http://localhost:8080
 ```
 
-The agent substitutes them literally into `.env.local` in Step B3. No other step requires them.
+`.env.local` written and confirmed. Not committed (gitignored). ✅
 
 ---
 
