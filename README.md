@@ -30,7 +30,7 @@ VITE_API_BASE_URL=http://localhost:8080
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/TU_USUARIO/sd-final-frontend.git
+git clone https://github.com/emilasheras/sd-final-frontend.git
 cd sd-final-frontend
 ```
 
