@@ -22,6 +22,14 @@ export async function fetchPrivateItems(token) {
   return res.json()
 }
 
+export async function fetchBehaviors(token) {
+  const res = await fetch(`${BASE_URL}/api/private/behaviors`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!res.ok) throw new Error(`Error ${res.status}`)
+  return res.json()
+}
+
 // Journal Activities api services
 
 export async function fetchActivities(token, date) {
