@@ -15,15 +15,15 @@ export default function PublicPage() {
 
   return (
     <div className="max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Pagina Publica</h1>
-      <div className="bg-white rounded-lg shadow p-6 border">
-        <p className="text-sm text-gray-400 mb-4">
-          <code>GET /api/public/ping</code> - sin token de autenticacion
+      <h1 className="text-2xl font-bold text-zinc-100 mb-6">Endpoint público</h1>
+      <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6">
+        <p className="text-sm text-zinc-500 mb-4 font-mono">
+          GET /api/public/ping — sin token de autenticación
         </p>
-        {loading && <p className="text-gray-400">Llamando al backend...</p>}
-        {error && <p className="text-red-500">Error: {error}</p>}
+        {loading && <p className="text-zinc-500">Llamando al backend...</p>}
+        {error && <p className="text-red-400">Error: {error}</p>}
         {data && (
-          <pre className="bg-gray-50 p-4 rounded text-sm text-green-700 overflow-auto">
+          <pre className="bg-zinc-900 p-4 rounded text-sm text-emerald-400 overflow-auto">
             {JSON.stringify(data, null, 2)}
           </pre>
         )}

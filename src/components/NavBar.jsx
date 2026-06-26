@@ -4,43 +4,42 @@ import { Link } from 'react-router-dom'
 export default function NavBar() {
   const { isAuthenticated, isLoading, loginWithRedirect, logout, user } = useAuth0()
 
-  // render nothing in the auth section while SDK is rehydrating
   if (isLoading) return (
-    <nav className="bg-blue-600 text-white shadow-md">
+    <nav className="bg-zinc-950 border-b border-zinc-800">
       <div className="container mx-auto px-4 py-3">
-        <span className="font-bold text-lg">SD Final</span>
+        <span className="font-semibold text-zinc-100">Daily Journal</span>
       </div>
     </nav>
   )
 
   return (
-    <nav className="bg-blue-600 text-white shadow-md">
+    <nav className="bg-zinc-950 border-b border-zinc-800">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex gap-6 items-center">
-          <Link to="/" className="font-bold text-lg hover:text-blue-200">SD Final</Link>
-          <Link to="/public" className="hover:text-blue-200">Publico</Link>
+          <Link to="/" className="font-semibold text-zinc-100 hover:text-white">Daily Journal</Link>
+          <Link to="/public" className="text-sm text-zinc-400 hover:text-zinc-200">Público</Link>
           {isAuthenticated && (
-            <Link to="/private" className="hover:text-blue-200">Privado</Link>
+            <Link to="/private" className="text-sm text-zinc-400 hover:text-zinc-200">Journal</Link>
           )}
         </div>
 
         <div className="flex items-center gap-4">
           {isAuthenticated ? (
             <>
-              <span className="text-sm text-blue-100">{user?.email}</span>
+              <span className="text-xs text-zinc-500">{user?.email}</span>
               <button
                 onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
-                className="bg-white text-blue-600 px-4 py-1 rounded text-sm font-medium hover:bg-blue-50"
+                className="bg-zinc-700 text-zinc-100 px-4 py-1 rounded text-sm hover:bg-zinc-600"
               >
-                Cerrar Sesion
+                Cerrar sesión
               </button>
             </>
           ) : (
             <button
               onClick={() => loginWithRedirect()}
-              className="bg-white text-blue-600 px-4 py-1 rounded text-sm font-medium hover:bg-blue-50"
+              className="bg-zinc-700 text-zinc-100 px-4 py-1 rounded text-sm hover:bg-zinc-600"
             >
-              Iniciar Sesion
+              Iniciar sesión
             </button>
           )}
         </div>
