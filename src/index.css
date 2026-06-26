@@ -11,7 +11,7 @@ body {
   color: #f4f4f5;
 }
 
-/* Themed scrollbars — webkit */
+/* Themed scrollbars - webkit */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;

@@ -131,7 +131,7 @@ export default function PrivatePage() {
   return (
     <div className="flex-1 flex flex-col gap-4 min-h-0">
 
-      {/* Date navigation + progress — fixed height */}
+      {/* Date navigation + progress - fixed height */}
       <div className="flex items-center gap-3 shrink-0">
         <button
           onClick={() => setDate(d => shiftDate(d, -1))}
@@ -162,7 +162,7 @@ export default function PrivatePage() {
         </div>
       )}
 
-      {/* Two-column layout — takes all remaining height */}
+      {/* Two-column layout - takes all remaining height */}
       <div className="flex-1 flex gap-5 min-h-0">
 
         {/* Left column: behaviors + WIP sections */}
@@ -338,7 +338,7 @@ export default function PrivatePage() {
                     </form>
                   )}
 
-                  {/* "agregar otra" — collapses to zero height when not hovered */}
+                  {/* "agregar otra" - collapses to zero height when not hovered */}
                   {hasActivities && !isActive && (
                     <div className="overflow-hidden max-h-0 group-hover/hour:max-h-10 transition-all duration-150">
                       <div

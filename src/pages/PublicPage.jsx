@@ -18,7 +18,7 @@ export default function PublicPage() {
       <h1 className="text-2xl font-bold text-zinc-100 mb-6">Endpoint público</h1>
       <div className="bg-zinc-800 rounded-lg border border-zinc-700 p-6">
         <p className="text-base text-zinc-500 mb-4 font-mono">
-          GET /api/public/ping — sin token de autenticación
+          GET /api/public/ping - sin token de autenticación
         </p>
         {loading && <p className="text-zinc-500">Llamando al backend...</p>}
         {error && <p className="text-red-400">Error: {error}</p>}

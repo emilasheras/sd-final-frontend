@@ -16,7 +16,7 @@ export default function HomePage() {
         <div className="bg-zinc-800 p-5 rounded-lg border border-zinc-700">
           <h2 className="font-semibold text-zinc-100 mb-2">Conductas diarias</h2>
           <p className="text-base text-zinc-400">
-            Hábitos fijos que marcás cada día — higiene, comidas, sueño, cuidado personal.
+            Hábitos fijos que marcás cada día - higiene, comidas, sueño, cuidado personal.
           </p>
           <p className="text-sm text-zinc-600 mt-3 font-mono">GET /api/private/behaviors</p>
         </div>
