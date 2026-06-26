@@ -7,9 +7,9 @@ import PrivatePage from './pages/PrivatePage.jsx'
 
 function App() {
   return (
-    <div className="min-h-screen bg-zinc-900">
+    <div className="h-screen bg-zinc-900 flex flex-col">
       <NavBar />
-      <main className="container mx-auto px-4 py-8">
+      <main className="flex-1 overflow-hidden flex flex-col container mx-auto px-4 py-4">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/public" element={<PublicPage />} />
